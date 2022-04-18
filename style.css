@@ -1,0 +1,179 @@
+:root {
+	/* color */
+	--color-orange: rgba(255, 149, 0, 0.8);
+	--color-white: white;
+	--color-black: rgb(48, 48, 48);
+	--color-red: rgb(186, 13, 13);
+	--color-dark-orange: rgb(230, 104, 1);
+
+	/* size */
+	--size-large: 50px;
+	--size-medium: 40px;
+	--size-small: 24px;
+	--size-micro: 16px;
+	--size-border-radius: 50px;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: "Orelega One", sans-serif;
+}
+
+/* common */
+
+i {
+	cursor: pointer;
+}
+
+body {
+	background: var(--color-orange);
+}
+
+/* game */
+
+.game {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+/* container bg */
+
+.container__bg {
+	background: url(/img/background.png) center center / cover no-repeat;
+	width: 90%;
+	height: 0;
+	border-radius: var(--size-border-radius);
+	padding-bottom: min(calc(3240 / 5760 * 100%), 90vh);
+	position: relative;
+}
+
+.game__header {
+	position: absolute;
+	text-align: center;
+	font-size: var(--size-large);
+	top: 50px;
+	left: 50%;
+	transform: translateX(-50%);
+	color: var(--color-dark-orange);
+	display: flex;
+}
+
+.game__button,
+.game__timer,
+.game__score {
+	border: 3px solid var(--color-dark-orange);
+	color: var(--color-dark-orange);
+	background: var(--color-white);
+	border-radius: calc(var(--size-border-radius) / 4);
+	margin: 10px;
+	height: 80px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.game__button {
+	width: 100px;
+}
+
+.game__button i {
+	font-size: var(--size-medium);
+}
+
+.game__timer {
+	width: 200px;
+}
+
+.game__score {
+	border-radius: var(--size-border-radius);
+	width: 80px;
+}
+
+/* modal */
+
+.modal__bg {
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.7);
+	position: absolute;
+	display: none;
+}
+
+.open {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal__play,
+.modal__refresh {
+	width: 400px;
+	border-radius: calc(var(--size-border-radius) / 3);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.modal__play {
+	height: 400px;
+	padding: 20px;
+	background: var(--color-orange);
+}
+
+.modal__play p,
+.modal__play span {
+	font-size: var(--size-small);
+	font-family: "Gaegu";
+	text-align: center;
+	font-weight: 500;
+}
+
+.modal__play-intro {
+	color: var(--color-white);
+}
+
+.modal__play-go {
+	cursor: pointer;
+	transition: all 0.3s;
+	color: var(--color-dark-orange);
+	background: var(--color-white);
+	padding: 10px 20px;
+	border-radius: var(--size-border-radius);
+}
+
+.modal__play i {
+	color: var(--color-white);
+	background: var(--color-dark-orange);
+	border-radius: var(--size-border-radius);
+	width: 33px;
+	height: 33px;
+	font-size: var(--size-micro);
+	line-height: 33px;
+}
+
+.modal__play-go:hover {
+	color: var(--color-red);
+	transform: scale(1.1);
+}
+
+.modal__refresh {
+	height: 200px;
+	background: var(--color-white);
+	font-size: var(--size-large);
+}
+
+.modal__refresh p {
+	font-size: var(--size-medium);
+}
+
+.modal__refresh i:hover {
+	color: var(--color-dark-orange);
+	transition: all 0.3s;
+	transform: scale(1.3);
+}
