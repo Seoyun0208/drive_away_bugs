@@ -7,6 +7,12 @@ const BUG_COUNT = 5;
 const field = document.querySelector(".game__field");
 const fieldRect = field.getBoundingClientRect();
 
+const carrotSound = new Audio("/sound/carrot_pull.mp3");
+const bugSound = new Audio("/sound/bug_pull.mp3");
+const alertSound = new Audio("/sound/alert.wav");
+const bgSound = new Audio("/sound/bg.mp3");
+const gameWinSound = new Audio("/sound/game_win.mp3");
+
 // 게임 초기화
 function initGame() {
 	started = false;
@@ -47,32 +53,32 @@ function randomNumber(min, max) {
 let started = false;
 const GAME_DURATION = 5;
 
-function gameStart() {
-	gameTimerStart();
+function startGame() {
+	playSound(bgSound);
+	startGameTimer();
 	started = true;
 }
 
 // 게임 타이머 시작
 let timer = undefined;
 
-function gameTimerStart() {
+function startGameTimer() {
 	let time = GAME_DURATION;
 	timer = setInterval(() => {
 		updateGameTImerText(time);
 		--time;
 		if (time < 0) {
-			clearInterval(timer);
-			bgRefresh.classList.add("open");
+			finishGame("lose");
 			score = 0;
 		}
 	}, 1000);
 }
 
 // 게임 타이머 정지
-function gameTimerStop(timer) {
+function stopGameTimer(timer) {
 	started = false;
 	clearInterval(timer);
-	scoreBoard();
+	updateScoreboard();
 }
 
 // 브라우저 게임 타이머 텍스트
@@ -95,7 +101,7 @@ modalStart.addEventListener("click", (e) => {
 		bgPlay.classList.remove("open");
 		gameHeader.classList.add("show");
 		initGame();
-		gameStart();
+		startGame();
 	}
 });
 
@@ -104,8 +110,10 @@ const gameBtn = document.querySelector(".game__button");
 const bgRestart = document.querySelector(".restart");
 
 gameBtn.addEventListener("click", () => {
+	stopSound(bgSound);
+	playSound(alertSound);
 	bgRestart.classList.add("open");
-	gameTimerStop(timer);
+	stopGameTimer(timer);
 });
 
 // 게임 다시시작(restart, refresh) 모달창
@@ -116,13 +124,13 @@ const refreshBtn = document.querySelector(".refresh__button");
 restartBtn.addEventListener("click", () => {
 	bgRestart.classList.remove("open");
 	initGame();
-	gameStart();
+	startGame();
 });
 
 refreshBtn.addEventListener("click", () => {
 	bgRefresh.classList.remove("open");
 	initGame();
-	gameStart();
+	startGame();
 });
 
 // field 의 아이템 이벤트
@@ -137,35 +145,51 @@ function onFieldClick(e) {
 	if (target.matches(".bug")) {
 		// 버그
 		target.remove();
+		playSound(bugSound);
 		score++;
 	} else if (target.matches(".carrot")) {
 		// 당근
 		score--;
+		playSound(carrotSound);
 		finishGame("lose");
 	}
 
-	scoreBoard();
+	updateScoreboard();
 
 	if (score === BUG_COUNT) {
 		finishGame("win");
 	}
 }
 
+// 게임 사운드 시작
+function playSound(sound) {
+	sound.currentTime = 0;
+	sound.play();
+}
+
+// 게임 사운드 종료
+function stopSound(sound) {
+	sound.pause();
+}
+
 // 게임 종료
 function finishGame(winOrLose) {
-	gameTimerStop(timer);
+	stopGameTimer(timer);
 	bgRefresh.classList.add("open");
 	if (winOrLose === "win") {
+		playSound(gameWinSound);
 		msgRefresh.innerText = "YOU WON";
 	} else if (winOrLose === "lose") {
+		playSound(carrotSound);
 		msgRefresh.innerText = "YOU LOST";
 	}
+	stopSound(bgSound);
 }
 
 // 점수 기록판
 let score = 0;
 
-function scoreBoard() {
+function updateScoreboard() {
 	if (started) {
 		gameScore.innerText = BUG_COUNT - score;
 	} else {
