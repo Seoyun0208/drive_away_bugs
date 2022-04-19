@@ -50,7 +50,7 @@ button {
 /* game bg */
 
 .game__bg {
-	background: url(/img/background.png) center center / cover no-repeat;
+	background: url(./img/background.png) center center / cover no-repeat;
 	width: 90%;
 	height: 0;
 	border-radius: var(--size-border-radius);
