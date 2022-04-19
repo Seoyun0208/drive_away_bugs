@@ -81,11 +81,6 @@ button {
 	height: 45%;
 }
 
-.game__field img {
-	position: absolute;
-	transform: translate(500px, 130px);
-}
-
 .game__button,
 .game__timer,
 .game__score {
@@ -103,6 +98,11 @@ button {
 .bug,
 .carrot {
 	cursor: pointer;
+}
+
+.bug:hover,
+.carrot:hover {
+	transform: scale(1.1);
 }
 
 .game__button {
