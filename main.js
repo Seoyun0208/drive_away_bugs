@@ -1,7 +1,7 @@
 "use strict";
 
 // ! 초기값
-const CARROT_SIZE = 80;
+let CARROT_SIZE = 80;
 const CARROT_COUNT = 10;
 const BUG_COUNT = 10;
 const GAME_DURATION = 10;
@@ -11,9 +11,11 @@ let timer = undefined;
 let score = 0;
 
 // ! 변수
+const width = document.body.clientWidth;
 const field = document.querySelector(".game__field");
 const fieldRect = field.getBoundingClientRect();
 const restartBtn = document.querySelector(".restart__button");
+const msgRestart = document.querySelector(".modal__message-restart");
 const bgRefresh = document.querySelector(".refresh");
 const refreshBtn = document.querySelector(".refresh__button");
 const gameTimer = document.querySelector(".game__timer");
@@ -34,6 +36,12 @@ const bgSound = new Audio("./sound/bg.mp3");
 const gameWinSound = new Audio("./sound/game_win.mp3");
 
 // ! 함수
+function onResize() {
+	if (width <= 500) {
+		CARROT_SIZE = 40;
+	}
+}
+
 // 게임 시작 모달창 -> initGame, startGame
 modalStart.addEventListener("click", (e) => {
 	if (
@@ -84,10 +92,12 @@ function finishGame(winOrLose) {
 	bgRefresh.classList.add("open");
 	if (winOrLose === "win") {
 		playSound(gameWinSound);
-		msgRefresh.innerText = "YOU WON";
+		msgRefresh.innerHTML =
+			"와!!<br />벌써 벌레를 모두 잡았다구??<br />너무 고마워!<br />덕분에 당근도 모두 무사하고<br />코딩하러 다시 가도 되겠다~😆";
 	} else if (winOrLose === "lose") {
 		playSound(carrotSound);
-		msgRefresh.innerText = "YOU LOST";
+		msgRefresh.innerHTML =
+			"이게 뭐야!??<br />여기 봐! 아직도 벌레가 있잖아..<br />역시 당근을 안 건드리고<br/> 벌레 잡기는 어렵긴 하지.<br />고생했어! 그래도 너무 아쉽다~ 😭";
 	}
 	stopSound(bgSound);
 }
@@ -179,7 +189,8 @@ function onFieldClick(e) {
 // ! 이벤트리스너
 // 창 크기 조절시 아이템 재배치
 window.addEventListener("resize", () => {
-	alert("브라우저 창 크기가 변경되어 게임을 다시 시작해야 합니다.");
+	// alert("브라우저 창 크기가 변경되어 게임을 다시 시작해야 합니다.");
+	onResize();
 	window.location.reload();
 });
 
@@ -188,6 +199,7 @@ gameBtn.addEventListener("click", () => {
 	stopSound(bgSound);
 	playSound(alertSound);
 	bgRestart.classList.add("open");
+	msgRestart.innerHTML = "처음부터<br />다시 한번 해볼래?";
 	stopGameTimer(timer);
 });
 

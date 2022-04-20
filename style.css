@@ -1,10 +1,10 @@
 :root {
 	/* color */
-	--color-orange: rgba(255, 149, 0, 0.8);
-	--color-white: white;
-	--color-black: rgb(48, 48, 48);
-	--color-red: rgb(186, 13, 13);
-	--color-dark-orange: rgb(230, 104, 1);
+	--color-orange: rgba(255, 149, 0, 0.9);
+	--color-white: rgba(255, 255, 255, 0.9);
+	--color-black: rgba(0, 0, 0, 0.5);
+	--color-red: rgb(233, 78, 0);
+	--color-dark-orange: rgb(255, 136, 0);
 
 	/* size */
 	--size-large: 50px;
@@ -19,6 +19,7 @@
 	margin: 0;
 	padding: 0;
 	font-family: "Orelega One", sans-serif;
+	color: var(--color-dark-orange);
 }
 
 /* common */
@@ -111,6 +112,12 @@ button {
 
 .game__button i {
 	font-size: var(--size-medium);
+	transition: all 0.5s;
+}
+
+.game__button:hover i {
+	color: var(--color-red);
+	transform: scale(1.1);
 }
 
 .game__timer {
@@ -127,7 +134,7 @@ button {
 .modal__bg {
 	width: 100vw;
 	height: 100vh;
-	background: rgba(0, 0, 0, 0.7);
+	background: var(--color-black);
 	position: absolute;
 	display: none;
 }
@@ -180,7 +187,6 @@ button {
 .modal__start {
 	cursor: pointer;
 	transition: all 0.3s;
-	color: var(--color-dark-orange);
 	background: var(--color-white);
 	padding: 10px 20px;
 	border-radius: var(--size-border-radius);
@@ -188,30 +194,45 @@ button {
 }
 
 .modal__start:hover {
-	color: var(--color-red);
 	transform: scale(1.1);
+	font-weight: bold;
 }
 
-.modal__restart {
-	height: 200px;
+.modal__start:hover span {
+	color: var(--color-red);
+}
+
+.modal__start:hover i {
+	background: var(--color-red);
+}
+
+.modal__restart,
+.modal__refresh {
 	background: var(--color-white);
 	font-size: var(--size-large);
+	height: 300px;
 }
 
+.modal__message-restart,
+.modal__message-refresh {
+	font-family: "Gaegu";
+	font-size: var(--size-small);
+	text-align: center;
+	color: var(--color-dark-orange);
+	font-weight: 500;
+}
+
+.modal__message-restart {
+	font-size: calc(var(--size-small) * 1.3);
+}
 .restart__button {
 	font-size: var(--size-large);
 }
 
 .modal__restart i:hover {
-	color: var(--color-dark-orange);
+	color: var(--color-red);
 	transition: all 0.3s;
 	transform: scale(1.3);
-}
-
-.modal__refresh {
-	height: 200px;
-	background: var(--color-white);
-	font-size: var(--size-large);
 }
 
 .refresh__button {
@@ -219,7 +240,88 @@ button {
 }
 
 .modal__refresh i:hover {
-	color: var(--color-dark-orange);
+	color: var(--color-red);
 	transition: all 0.3s;
 	transform: scale(1.3);
+}
+
+@media screen and (max-width: 500px) {
+	:root {
+		/* size */
+		--size-large: 40px;
+		--size-medium: 30px;
+		--size-small: 17px;
+		--size-micro: 14px;
+		--size-border-radius: 50px;
+	}
+
+	.game__header {
+		position: absolute;
+		text-align: center;
+		font-size: var(--size-large);
+		top: 30px;
+		left: 50%;
+		transform: translateX(-50%);
+		color: var(--color-dark-orange);
+		display: flex;
+		visibility: hidden;
+	}
+	.show {
+		visibility: visible;
+	}
+
+	.game__button,
+	.game__timer,
+	.game__score {
+		margin: 10px;
+		height: 60px;
+	}
+
+	.game__button {
+		width: 60px;
+	}
+
+	.game__button i {
+		font-size: var(--size-medium);
+	}
+
+	.game__timer {
+		width: 120px;
+	}
+
+	.game__score {
+		border-radius: var(--size-border-radius);
+		width: 60px;
+	}
+
+	.bug {
+		width: 30px;
+		height: 30px;
+	}
+
+	.carrot {
+		width: 40px;
+		height: 40px;
+	}
+
+	.modal__restart,
+	.modal__refresh {
+		height: 200px;
+	}
+
+	.modal__play,
+	.modal__restart,
+	.modal__refresh {
+		width: 300px;
+	}
+
+	.modal__play {
+		height: 300px;
+		padding: 20px;
+		background: var(--color-orange);
+	}
+
+	.modal__start {
+		padding: 5px 10px;
+	}
 }
