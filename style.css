@@ -20,6 +20,11 @@
 	padding: 0;
 	font-family: "Orelega One", sans-serif;
 	color: var(--color-dark-orange);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 /* common */
@@ -256,15 +261,9 @@ button {
 	}
 
 	.game__header {
-		position: absolute;
-		text-align: center;
-		font-size: var(--size-large);
-		top: 30px;
-		left: 50%;
-		transform: translateX(-50%);
-		color: var(--color-dark-orange);
-		display: flex;
-		visibility: hidden;
+		top: 20px;
+		width: 250px;
+		font-size: calc(var(--size-small) * 1.3);
 	}
 	.show {
 		visibility: visible;
@@ -274,24 +273,24 @@ button {
 	.game__timer,
 	.game__score {
 		margin: 10px;
-		height: 60px;
+		height: 40px;
 	}
 
 	.game__button {
-		width: 60px;
+		width: 40px;
 	}
 
 	.game__button i {
-		font-size: var(--size-medium);
+		font-size: var(--size-small);
 	}
 
 	.game__timer {
-		width: 120px;
+		width: 100px;
 	}
 
 	.game__score {
 		border-radius: var(--size-border-radius);
-		width: 60px;
+		width: 40px;
 	}
 
 	.bug {

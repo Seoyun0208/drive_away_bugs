@@ -3,7 +3,7 @@
 // ! 초기값
 let CARROT_SIZE = 80;
 const CARROT_COUNT = 10;
-const BUG_COUNT = 10;
+const BUG_COUNT = 20;
 const GAME_DURATION = 10;
 
 let started = false;
@@ -130,10 +130,8 @@ function initGame() {
 	gameTimer.innerText = GAME_DURATION;
 	gameScore.innerText = BUG_COUNT;
 
-	addItem("carrot", CARROT_COUNT / 2, "img/carrot.png");
-	addItem("bug", BUG_COUNT / 2, "img/bug.png");
-	addItem("carrot", CARROT_COUNT / 2, "img/carrot.png");
-	addItem("bug", BUG_COUNT / 2, "img/bug.png");
+	addItem("carrot", CARROT_COUNT, "img/carrot.png");
+	addItem("bug", BUG_COUNT, "img/bug.png");
 }
 
 // field 에 아이템 랜덤 배치 -> randomNumber
