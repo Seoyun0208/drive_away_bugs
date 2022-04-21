@@ -36,12 +36,6 @@ const bgSound = new Audio("./sound/bg.mp3");
 const gameWinSound = new Audio("./sound/game_win.mp3");
 
 // ! 함수
-function onResize() {
-	if (width <= 500) {
-		CARROT_SIZE = 40;
-	}
-}
-
 // 게임 시작 모달창 -> initGame, startGame
 modalStart.addEventListener("click", (e) => {
 	if (
@@ -130,12 +124,19 @@ function initGame() {
 	gameTimer.innerText = GAME_DURATION;
 	gameScore.innerText = BUG_COUNT;
 
-	addItem("carrot", CARROT_COUNT, "img/carrot.png");
-	addItem("bug", BUG_COUNT, "img/bug.png");
+	addItem("carrot", CARROT_COUNT / 2, "img/carrot.png");
+	addItem("bug", BUG_COUNT / 2, "img/bug.png");
+	addItem("carrot", CARROT_COUNT / 2, "img/carrot.png");
+	addItem("bug", BUG_COUNT / 2, "img/bug.png");
 }
 
 // field 에 아이템 랜덤 배치 -> randomNumber
 function addItem(className, cnt, imgPath) {
+	if (fieldRect.width <= 600) {
+		CARROT_SIZE = 50;
+	} else {
+		CARROT_SIZE = 80;
+	}
 	const x1 = 0;
 	const y1 = 0;
 	const x2 = fieldRect.width - CARROT_SIZE;
@@ -188,7 +189,6 @@ function onFieldClick(e) {
 // 창 크기 조절시 아이템 재배치
 window.addEventListener("resize", () => {
 	// alert("브라우저 창 크기가 변경되어 게임을 다시 시작해야 합니다.");
-	onResize();
 	window.location.reload();
 });
 
